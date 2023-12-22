@@ -5,7 +5,8 @@ import (
 	"strings"
 
 	"github.com/nidhey27/coffee-assignment/common"
-	calculate "github.com/nidhey27/coffee-assignment/internal/calcluate"
+
+	"github.com/nidhey27/coffee-assignment/internal/calculate"
 	"github.com/nidhey27/coffee-assignment/internal/storage"
 )
 
