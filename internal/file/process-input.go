@@ -21,25 +21,25 @@ func ProcessInput(data string) (map[string]float64, map[string]string) {
 		if strings.Contains(input, common.QUESTION_MARK) {
 			if strings.Contains(input, common.MUCH) {
 				result := calculate.CalculateHowMuch(input, romanMap, valueMap)
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			} else if strings.Contains(input, common.MANY) {
 				result := calculate.CalculateHowMany(input, romanMap, valueMap)
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			} else if strings.Contains(input, common.HAS_MORE) {
 				result := calculate.HasMore(input, romanMap, valueMap)
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			} else if strings.Contains(input, common.HAS_LESS) {
 				result := calculate.HasLess(input, romanMap, valueMap)
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			} else if strings.Contains(input, common.LARGER_THAN) {
 				result := calculate.LargerThan(input, romanMap)
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			} else if strings.Contains(input, common.SMALLER_THAN) {
 				result := calculate.SmallerThan(input, romanMap)
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			} else {
 				result := calculate.ReturnWrong()
-				fmt.Println(input, "-", result)
+				fmt.Println(result)
 			}
 
 		} else {
