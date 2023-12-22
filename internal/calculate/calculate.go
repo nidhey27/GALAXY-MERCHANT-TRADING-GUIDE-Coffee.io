@@ -93,7 +93,6 @@ func extractMetalNames(splitParam, input string) (string, string, bool) {
 	if strings.Contains(input, splitParam) {
 		splitted := strings.Split(input, splitParam)
 
-		// Extract metal names
 		metals := strings.Fields(splitted[0])
 		if len(metals) > 0 {
 			metal1 = metals[len(metals)-1]
@@ -118,13 +117,15 @@ func HasMore(input string, romanMap map[string]string, valueMap map[string]float
 	if strings.Contains(input, common.CREDITS_THAN) {
 		metal1, metal2, _ = extractMetalNames(common.CREDITS_THAN, input)
 
+		roman1, roman2, _ := extractRomanNames(common.CREDITS_THAN, input, romanMap)
+
 		credits1 := valueMap[metal1]
 		credits2 := valueMap[metal2]
 
 		if credits1 > credits2 {
-			result = fmt.Sprintf("%s has more Credits than %s", metal1, metal2)
+			result = fmt.Sprintf("%s has more Credits than %s", strings.Join(roman1, " ")+" "+metal1, strings.Join(roman2, " ")+" "+metal2)
 		} else {
-			result = fmt.Sprintf("%s has less Credits than %s", metal1, metal2)
+			result = fmt.Sprintf("%s has less Credits than %s", strings.Join(roman1, " ")+" "+metal1, strings.Join(roman2, " ")+" "+metal2)
 		}
 	} else {
 		result = ReturnWrong()
@@ -141,13 +142,15 @@ func HasLess(input string, romanMap map[string]string, valueMap map[string]float
 	if strings.Contains(input, common.CREDITS_LESS) {
 		metal1, metal2, _ = extractMetalNames(common.CREDITS_LESS, input)
 
+		roman1, roman2, _ := extractRomanNames(common.CREDITS_LESS, input, romanMap)
+
 		credits1 := valueMap[metal1]
 		credits2 := valueMap[metal2]
 
 		if credits1 > credits2 {
-			result = fmt.Sprintf("%s has more Credits than %s", metal1, metal2)
+			result = fmt.Sprintf("%s has more Credits than %s", strings.Join(roman1, " ")+" "+metal1, strings.Join(roman2, " ")+" "+metal2)
 		} else {
-			result = fmt.Sprintf("%s has less Credits than %s", metal1, metal2)
+			result = fmt.Sprintf("%s has less Credits than %s", strings.Join(roman1, " ")+" "+metal1, strings.Join(roman2, " ")+" "+metal2)
 		}
 	} else {
 		result = ReturnWrong()
@@ -161,7 +164,6 @@ func LargerThan(input string, romanMap map[string]string) string {
 	var metal2 []string
 
 	if strings.Contains(input, common.LARGER_THAN) {
-		// Extract metal names
 		metal1, metal2, _ = extractRomanNames(common.LARGER_THAN, input, romanMap)
 
 		credits1 := 0
@@ -193,7 +195,6 @@ func SmallerThan(input string, romanMap map[string]string) string {
 	var metal2 []string
 
 	if strings.Contains(input, common.SMALLER_THAN) {
-		// Extract metal names
 		metal1, metal2, _ = extractRomanNames(common.SMALLER_THAN, input, romanMap)
 
 		credits1 := 0
@@ -220,7 +221,7 @@ func SmallerThan(input string, romanMap map[string]string) string {
 }
 
 func extractRomanNames(splitParam, input string, romanMap map[string]string) ([]string, []string, bool) {
-	var metal1, metal2 []string
+	var roman1, roman2 []string
 	var found bool
 
 	if strings.Contains(input, splitParam) {
@@ -228,15 +229,15 @@ func extractRomanNames(splitParam, input string, romanMap map[string]string) ([]
 
 		for _, val := range strings.Split(splitted[0], " ") {
 			if _, ok := romanMap[string(val)]; ok {
-				metal1 = append(metal1, val)
+				roman1 = append(roman1, val)
 			}
 		}
 		for _, val := range strings.Split(splitted[1], " ") {
 			if _, ok := romanMap[string(val)]; ok {
-				metal2 = append(metal2, val)
+				roman2 = append(roman2, val)
 			}
 		}
 	}
 
-	return metal1, metal2, found
+	return roman1, roman2, found
 }
