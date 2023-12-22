@@ -24,6 +24,6 @@ func main() {
 		fmt.Println("ERROR: ", err.Error())
 		panic(err)
 	}
-	
-	file.ParseInput(data)
+
+	file.ProcessInput(data)
 }

@@ -13,7 +13,7 @@ import (
 var valueMap = make(map[string]float64)
 var romanMap = make(map[string]string)
 
-func ParseInput(data string) (map[string]float64, map[string]string) {
+func ProcessInput(data string) (map[string]float64, map[string]string) {
 	splittedInput := strings.Split(data, "\n")
 	for _, input := range splittedInput {
 		input = strings.TrimSpace(input)
