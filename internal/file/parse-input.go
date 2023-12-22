@@ -4,56 +4,49 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/nidhey27/coffee-assignment/helpers"
+	"github.com/nidhey27/coffee-assignment/common"
+	calculate "github.com/nidhey27/coffee-assignment/internal/calcluate"
+	"github.com/nidhey27/coffee-assignment/internal/storage"
 )
 
 var valueMap = make(map[string]float64)
 var romanMap = make(map[string]string)
-
-const many = "how many"
-const much = "how much"
-const credits = "Credits"
-const hasLess = "has less"
-const hasMore = "has more"
-const larger = "larger than"
-const smaller = "smaller than"
-const questionMark = "?"
 
 func ParseInput(data string) (map[string]float64, map[string]string) {
 	splittedInput := strings.Split(data, "\n")
 	for _, input := range splittedInput {
 		input = strings.TrimSpace(input)
 
-		if strings.Contains(input, questionMark) {
-			if strings.Contains(input, much) {
-				result := helpers.CalculateHowMuch(input, romanMap, valueMap)
+		if strings.Contains(input, common.QUESTION_MARK) {
+			if strings.Contains(input, common.MUCH) {
+				result := calculate.CalculateHowMuch(input, romanMap, valueMap)
 				fmt.Println(input, "-", result)
-			} else if strings.Contains(input, many) {
-				result := helpers.CalculateHowMany(input, romanMap, valueMap)
+			} else if strings.Contains(input, common.MANY) {
+				result := calculate.CalculateHowMany(input, romanMap, valueMap)
 				fmt.Println(input, "-", result)
-			} else if strings.Contains(input, hasMore) {
-				result := helpers.HasMore(input, romanMap, valueMap)
+			} else if strings.Contains(input, common.HAS_MORE) {
+				result := calculate.HasMore(input, romanMap, valueMap)
 				fmt.Println(input, "-", result)
-			} else if strings.Contains(input, hasLess) {
-				result := helpers.HasLess(input, romanMap, valueMap)
+			} else if strings.Contains(input, common.HAS_LESS) {
+				result := calculate.HasLess(input, romanMap, valueMap)
 				fmt.Println(input, "-", result)
-			} else if strings.Contains(input, larger) {
-				result := helpers.LargerThan(input, romanMap)
+			} else if strings.Contains(input, common.LARGER_THAN) {
+				result := calculate.LargerThan(input, romanMap)
 				fmt.Println(input, "-", result)
-			} else if strings.Contains(input, smaller) {
-				result := helpers.SmallerThan(input, romanMap)
+			} else if strings.Contains(input, common.SMALLER_THAN) {
+				result := calculate.SmallerThan(input, romanMap)
 				fmt.Println(input, "-", result)
 			} else {
-				result := helpers.ReturnWrong()
+				result := calculate.ReturnWrong()
 				fmt.Println(input, "-", result)
 			}
 
 		} else {
-			if strings.Contains(input, credits) {
-				key, value := helpers.StoreValueMap(input, romanMap)
+			if strings.Contains(input, common.CREDITS) {
+				key, value := storage.StoreValueMap(input, romanMap)
 				valueMap[key] = value
 			} else {
-				key, value := helpers.StoreRomanMap(input)
+				key, value := storage.StoreRomanMap(input)
 				if key != "" && value != "" {
 					romanMap[key] = value
 				}

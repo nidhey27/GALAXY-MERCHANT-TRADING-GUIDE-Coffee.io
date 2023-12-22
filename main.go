@@ -21,10 +21,9 @@ func main() {
 
 	data, err := file.ReadFile(*filePath)
 	if err != nil {
-		fmt.Errorf("ERROR: ", err.Error())
+		fmt.Println("ERROR: ", err.Error())
 		panic(err)
 	}
-	// fmt.Println(data)
-
+	
 	file.ParseInput(data)
 }
